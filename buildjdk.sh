@@ -16,6 +16,11 @@ else
   fi
 fi
 
+if [[ "$TARGET_JDK" == "aarch64" ]]
+then
+   export CFLAGS+=" -march=armv8-a+simd -mcpu=cortex-a53"
+fi
+
 # if [ "$TARGET_JDK" == "aarch32" ] || [ "$TARGET_JDK" == "aarch64" ]
 # then
 #   export CFLAGS+=" -march=armv7-a+neon"
@@ -56,7 +61,7 @@ AUTOCONF_EXTRA_ARGS+="OBJCOPY=$OBJCOPY \
   STRIP=$STRIP \
   "
 
-export CFLAGS+=" -DANDROID -pipe -integrated-as -mllvm -polly -mllvm -polly-vectorizer=stripmine -mllvm -polly-invariant-load-hoisting -mllvm -polly-run-inliner -mllvm -polly-run-dce -flto=thin -fno-emulated-tls -fwhole-program-vtables"
+export CFLAGS+=" -DANDROID -pipe -integrated-as -mllvm -polly -mllvm -polly-vectorizer=stripmine -mllvm -polly-invariant-load-hoisting -mllvm -polly-run-inliner -mllvm -polly-run-dce -flto=thin -femulated-tls -fwhole-program-vtables -fdata-sections -ffunction-sections -fmerge-all-constants"
 export LDFLAGS+=" -L$PWD/dummy_libs" 
 
 # Create dummy libraries so we won't have to remove them in OpenJDK makefiles
