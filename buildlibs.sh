@@ -7,7 +7,7 @@ echo "Building Freetype"
 
 export PATH=$TOOLCHAIN/bin:$PATH
 ./configure \
-  LD=$TOOLCHAIN/bin/lld \
+  LD=$TOOLCHAIN/bin/ld.lld \
   --host=$TARGET \
   --prefix=${PWD}/build_android-${TARGET_SHORT} \
   --without-zlib \
