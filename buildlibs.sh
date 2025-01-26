@@ -7,6 +7,7 @@ echo "Building Freetype"
 
 export PATH=$TOOLCHAIN/bin:$PATH
 ./configure \
+  LD=$TOOLCHAIN/bin/lld \
   --host=$TARGET \
   --prefix=${PWD}/build_android-${TARGET_SHORT} \
   --without-zlib \
@@ -21,5 +22,5 @@ if [[ "$error_code" -ne 0 ]]; then
   exit $error_code
 fi
 
-CFLAGS="-Ofast -fno-emulated-tls -fno-rtti" CXXFLAGS="-Ofast -fno-emulated-tls -fno-rtti" make -j4
+CFLAGS="-O3 -femulated-tls -fno-rtti" CXXFLAGS="-Ofast -femulated-tls -fno-rtti" make -j4
 make install
